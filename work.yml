@@ -1,0 +1,31 @@
+name: signin_request-
+
+on:
+
+  schedule:
+  - cron: 0 16 * * * 
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        
+      - name: 'Set up Python'
+        uses: actions/setup-python@v1
+        with:
+           python-version: 3.7
+           
+      - name: Install requirements
+        run: |
+          pip3 install -r ./requirements.txt
+            
+      - name: Run checkin
+        #env:
+        #  USERNAME: ${{ secrets.USERNAME }}
+        #  PASSWORD: ${{ secrets.PASSWORD }}
+        #  COOKIE: ${{ secrets.COOKIE }}
+        run: python3 ./main.py
