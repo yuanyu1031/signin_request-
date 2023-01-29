@@ -1,19 +1,22 @@
+import os
 import requests
+import urllib.parse
 
-cookies = {
-    '_ga': 'GA1.2.1521371181.1674981853',
-    '_gid': 'GA1.2.887338355.1674981853',
-    'koa:sess': 'eyJ1c2VySWQiOjIxMTUwMywiX2V4cGlyZSI6MTcwMDkwMTk4NzgyNywiX21heEFnZSI6MjU5MjAwMDAwMDB9',
-    'koa:sess.sig': 'CRiYvfARpzojEuw6i9JIi_Oif3s',
-}
+def ParseCookiestr(cookie_str):
+    cookielist = {}
+    for item in cookie_str.split(';'):
+        itemname=item.split('=')[0]
+        iremvalue=item.split('=')[1]
+        cookielist[itemname.strip()]=urllib.parse.unquote(iremvalue)
+    return cookielist
 
-headers = {
+
+headers1 = {
     'authority': 'glados.network',
     'accept': 'application/json, text/plain, */*',
     'accept-language': 'zh-CN,zh;q=0.9',
     'authorization': '74423511365535966705398523722820-720-1280',
     'content-type': 'application/json;charset=UTF-8',
-    # 'cookie': '_ga=GA1.2.1521371181.1674981853; _gid=GA1.2.887338355.1674981853; koa:sess=eyJ1c2VySWQiOjIxMTUwMywiX2V4cGlyZSI6MTcwMDkwMTk4NzgyNywiX21heEFnZSI6MjU5MjAwMDAwMDB9; koa:sess.sig=CRiYvfARpzojEuw6i9JIi_Oif3s',
     'origin': 'https://glados.network',
     'sec-ch-ua': '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
     'sec-ch-ua-mobile': '?0',
@@ -27,5 +30,7 @@ headers = {
 json_data = {
     'token': 'glados.network',
 }
-
-response = requests.post('https://glados.network/api/user/checkin', cookies=cookies, headers=headers, json=json_data)
+if __name__ == "__main__":
+    cookie_str1 = os.environ.get("COOKIE1", None)
+    cookies1 = ParseCookiestr(cookie_str1)
+    response1 = requests.post('https://glados.network/api/user/checkin', cookies=cookies1, headers=headers1, json=json_data)
