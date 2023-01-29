@@ -26,4 +26,6 @@ jobs:
       - name: Run checkin
         env:
             COOKIE1: ${{ secrets.COOKIE1 }}
+            COOKIE2: ${{ secrets.COOKIE2 }}
+            COOKIE3: ${{ secrets.COOKIE3 }}
         run: python3 ./main.py
