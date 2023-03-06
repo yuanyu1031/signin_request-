@@ -40,3 +40,6 @@ if __name__ == "__main__":
     response1 = requests.post('https://glados.network/api/user/checkin', cookies=cookies1, headers=headers, json=json_data)
     response2 = requests.post('https://glados.network/api/user/checkin', cookies=cookies2, headers=headers, json=json_data)
     response3 = requests.post('https://glados.network/api/user/checkin', cookies=cookies3, headers=headers, json=json_data)
+    cookie_str4 = os.environ.get("COOKIE4", None)
+    cookies4 = ParseCookiestr(cookie_str4)
+    response4 = requests.post('https://glados.network/api/user/checkin', cookies=cookies4, headers=headers, json=json_data)
